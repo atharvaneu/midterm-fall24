@@ -1,31 +1,61 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class MyCircularQueue {
     public MyCircularQueue(int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        queue = new int[k];
+        Arrays.fill(queue, -1);
     }
 
     public boolean enQueue(int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (isFull()) {
+            return false;
+        }
+
+        int len = queue.length;
+        queue[(rear + 1) % len] = value;
+        rear += 1;
+        return true;
     }
 
     public boolean deQueue() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (isEmpty()) {
+            return false;
+        }
+
+        int len = queue.length;
+        queue[(front + 1) % len] = -1;
+        front -= 1;
+
+
+        return true;
     }
 
     public int Front() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (isEmpty()) {
+            return -1;
+        }
+        return queue[front];
     }
 
     public int Rear() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (isEmpty()) {
+            return -1;
+        }
+        return queue[rear];
     }
 
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return queue[0] == -1;
     }
 
     public boolean isFull() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return queue[queue.length - 1] >= 0;
     }
+
+    private int[] queue;
+    private int front = -1;
+    private int rear = -1;
+
 }
